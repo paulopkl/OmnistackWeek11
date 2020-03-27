@@ -32,12 +32,12 @@ export default function Incidents() {
         }
 
         
-        const resposta = await api.get('incidents', () => {
+        const response = await api.get('incidents', {
             params: { page }
         });
         
-        setIncidents([...incidents, ...resposta.data]);
-        setTotal(resposta.headers(['X-Total-Registers']));
+        setIncidents([...incidents, ...response.data]);
+        setTotal(() => response.headers['x-total-count']); // Retorna o numero de casos cadastrados
         setPage(page + 1);
         setLoading(true);
     }
@@ -58,8 +58,8 @@ export default function Incidents() {
                 <Text style={styles.title}>Bem vindo!</Text>
                 <Text style={styles.description}>Escolha um dos casos abaixo e salve o dia.</Text>
 
-                <FlatList data={incidents} style={styles.incidentList} keyExtractor={incident => { return(String(incident.id))}} 
-                showsVerticalScrollIndicator={false} onEndReached={loadIncidents} onEndReachedThreshold={0.1}
+                <FlatList data={incidents} style={styles.incidentList} keyExtractor={incident => String(incident.id)}
+                /* showsVerticalScrollIndicator={false} */ onEndReached={loadIncidents} onEndReachedThreshold={0.1}
                 renderItem={({ item: incident }) => (
                     <View style={styles.incident}>
                         <Text style={[styles.incidentProperty, { marginTop: 0 }]}>ONG:</Text>

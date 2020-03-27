@@ -23,11 +23,9 @@ module.exports = {
     async Index(requisicao, resposta) {
         const { page = 1 } = requisicao.query; // Se ele não existir é igual á 1
 
-        const count = await connection('incidents').count()
+        const [count] = await connection('incidents').count();
 
-        console.log(count[0]);
-
-        resposta.header('X-Total-Registers', count[0]['count(*)']);
+        console.log(count["count(*)"]);
 
         const incidente = await connection('incidents')
             .join('users', 'users.id', '=', 'incidents.user_id') // Relacionar dados de duas tabelas
@@ -41,6 +39,8 @@ module.exports = {
                     'users.city', 
                     'users.uf'
                 ]); // Deste modo não pega o users.id para não subscrever o id de incidents
+
+        resposta.header('X-Total-Count', count["count(*)"]);
 
         return resposta.json(incidente);
     },
