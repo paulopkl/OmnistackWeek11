@@ -5,7 +5,7 @@ ___
 
 <h1>Interface Web da aplicação</h1>
 
-<img src="/frontend/assets/Login.PNG" width="450" /> <img src="/frontend/assets/Home.PNG" width="450" /> <img src="/frontend/assets/Register.PNG" width="450" />
+<img src="/frontend/assets/Login.PNG" width="450" alt="Login" /> <img src="/frontend/assets/Home.PNG" width="450" alt="Home" /> <img src="/frontend/assets/Register.PNG" width="450" alt="Register" />
 ___
 
 <h1>interface Mobile da aplicação</h1>
