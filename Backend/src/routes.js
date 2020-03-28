@@ -1,4 +1,5 @@
 const express = require('express');
+const { celebrate, Segments, Joi } = require('celebrate'); // Validators
 
 const UserController = require('./controllers/userController');
 const IncidentController = require('./controllers/IncidentController');
@@ -8,15 +9,38 @@ const SessionController = require('./controllers/SessionController');
 const router = express.Router();
 
 router.post('/sessions', SessionController.Create);
-
+////////
 router.get('/users', UserController.Index);
-router.post('/users',  UserController.Create);
-
-router.get('/profile', ProfileControler.Index);
-
+////////
+router.post('/users', celebrate({
+    [Segments.BODY]: Joi.object().keys({
+        name: Joi.string().required(),
+        email: Joi.string().required().email(),
+        whatssap: Joi.string().required().min(10).max(11),
+        city: Joi.string().required(),
+        uf: Joi.string().required().length(2)
+    })
+}), UserController.Create);
+////////
+router.get('/profile', celebrate({
+    [Segments.HEADERS]: Joi.object({
+        authorization: Joi.string().required()
+    }).unknown()
+}), ProfileControler.Index);
+////////
 router.post('/incidents', IncidentController.Create);
-router.get('/incidents', IncidentController.Index);
-router.delete('/incidents/:id', IncidentController.Delete);
+////////
+router.get('/incidents', celebrate({
+    [Segments.QUERY]: Joi.object().keys({
+        page: Joi.number(),
+    })
+}), IncidentController.Index);
+////////
+router.delete('/incidents/:id', celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+        id: Joi.number().required(),
+    })
+}), IncidentController.Delete);
 
 module.exports = router;
 

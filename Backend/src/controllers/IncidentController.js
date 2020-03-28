@@ -2,26 +2,26 @@ const connection = require('../database/connection');
 
 module.exports = {
 
-    async ListeCasoEspecifico(requisicao, resposta) {
+    async ListeCasoEspecifico(request, response) {
         return
     },
 
-    async Delete(requisicao, resposta) {
-        const { id } = requisicao.params;
-        const user_id = requisicao.headers.authorization;
+    async Delete(request, response) {
+        const { id } = request.params;
+        const user_id = request.headers.authorization;
         const MesmoID = await connection('incidents').where('id', id).select('user_id').first();
 
         if(MesmoID.user_id !== user_id) { // Se o user_id da tabela foi Diferente do Id da requisição Faça:
-            return resposta.status(401).json({ error: "Você não tem permissão para fazer isso." }); // Retorna erro de Permissão.
+            return response.status(401).json({ error: "Você não tem permissão para fazer isso." }); // Retorna erro de Permissão.
         }
 
         await connection('incidents').where('id', id).delete();
 
-        return resposta.status(204).send();
+        return response.status(204).send();
     },
     
-    async Index(requisicao, resposta) {
-        const { page = 1 } = requisicao.query; // Se ele não existir é igual á 1
+    async Index(request, response) {
+        const { page = 1 } = request.query; // Se ele não existir é igual á 1
 
         const [count] = await connection('incidents').count();
 
@@ -40,16 +40,16 @@ module.exports = {
                     'users.uf'
                 ]); // Deste modo não pega o users.id para não subscrever o id de incidents
 
-        resposta.header('X-Total-Count', count["count(*)"]);
+        response.header('X-Total-Count', count["count(*)"]);
 
-        return resposta.json(incidente);
+        return response.json(incidente);
     },
 
-    async Create(requisicao, resposta) {
-        const { title, description, value } = requisicao.body;
-        // requisicao.headers; // Dados da autenticação
-        const user_id = requisicao.headers.authorization; // Passado no header da requisição POST
+    async Create(request, response) {
+        const { title, description, value } = request.body;
+        // request.headers; // Dados da autenticação
+        const user_id = request.headers.authorization; // Passado no header da requisição POST
         const [id] = await connection('incidents').insert({ title, description, value, user_id }); // Desestruturou o id
-        return resposta.json({ id }); // Retorna o id no formato JSON  
+        return response.json({ id }); // Retorna o id no formato JSON  
     }
 };
