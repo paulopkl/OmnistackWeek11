@@ -10,4 +10,4 @@ ___
 
 <h1>Parte Mobile da aplicação</h1>
 
-<img src="/Mobile/assets/AppSplash.png" width="100" /> <img src="/Mobile/assets/AppHome.png" width="100" /> <img src="/Mobile/assets/AppCase.png" width="100" />
+<img src="/Mobile/assets/AppSplash.png" width="200" /> <img src="/Mobile/assets/AppHome.png" width="200" /> <img src="/Mobile/assets/AppCase.png" width="200" />
