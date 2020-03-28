@@ -4,7 +4,7 @@ ___
 
 <h1>Parte Web da aplicação</h1>
 
-<img src="/frontend/assets/Login.PNG" width="120" /> <img src="/frontend/assets/Home.PNG" width="120" /> <img src="/frontend/assets/Register.PNG" width="120" />
+<img src="/frontend/assets/Login.PNG" width="520" /> <img src="/frontend/assets/Home.PNG" width="520" /> <img src="/frontend/assets/Register.PNG" width="520" />
 
 ___
 
