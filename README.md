@@ -1,6 +1,12 @@
 <h1>Projeto SemanaOministack11 Finalizado!!</h1>
 
 Projeto com sua estrutura de desenvolvimento, portanto não tem o build.
+
+<h3>Técnologias:</H3>
+
+* NodeJS
+* ReactJS
+* React-Native
 ___
 
 <h1>Interface Web da aplicação</h1>
