@@ -2,7 +2,7 @@
 
 Projeto com sua estrutura de desenvolvimento, portanto não tem o build.
 
-<h3>Técnologias:</H3>
+<h3>Tecnologias:</H3>
 
 * NodeJS
 * ReactJS
